@@ -5,3 +5,4 @@ __pycache__
 test_data
 build/
 .vscode/
+docker.conf.env

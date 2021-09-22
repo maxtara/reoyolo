@@ -8,7 +8,6 @@ setup(
     long_description=description,
     url='https://github.com/maxtara/reoyolo',
     author='maxtara',
-    author_email='maxtara@googlegroups.com',
     license='MIT',
     classifiers=[
         'Development Status :: 3 - Alpha',

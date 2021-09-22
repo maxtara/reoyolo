@@ -1,0 +1,11 @@
+FROM reoyolo:latest
+
+COPY reoyolo /code/reoyolo/
+
+RUN mkdir /code/test_data/
+RUN mkdir /code/reolink/
+RUN mkdir /code/reolink_out/
+RUN mkdir /code/reolink_orig/
+RUN mkdir /code/reolink_cuts/
+
+COPY test_data/* /code/test_data/
