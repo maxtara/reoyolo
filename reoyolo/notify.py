@@ -53,9 +53,8 @@ def notify_img(path, object_type, objects):
             "image": conf.DOMAIN + '/local/' + path
         }
     }
-
-    response = post(f"{conf.DOMAIN}/api/services/notify/{conf.SERVICE}", headers={'Authorization': conf.TOKEN,'content-type': 'application/json'}, json=data)
-    response.raise_for_status()
+    # Not going to raise if this fails, because it's not critical
+    post(f"{conf.DOMAIN}/api/services/notify/{conf.SERVICE}", headers={'Authorization': conf.TOKEN,'content-type': 'application/json'}, json=data)
 
 
 def notify(title, message):
@@ -65,5 +64,5 @@ def notify(title, message):
         "message": message,
         "title": title
     }
-    response = post(f"{conf.DOMAIN}/api/services/notify/{conf.SERVICE}", headers={'Authorization': conf.TOKEN,'content-type': 'application/json'}, json=data)
-    response.raise_for_status()
+    # Not going to raise if this fails, because it's not critical
+    post(f"{conf.DOMAIN}/api/services/notify/{conf.SERVICE}", headers={'Authorization': conf.TOKEN,'content-type': 'application/json'}, json=data)

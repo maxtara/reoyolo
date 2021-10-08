@@ -44,6 +44,7 @@ mkdir test_data/
 # Put test files in there
 docker build -t reoyolotest -f DockerfileTest .
 docker run -it --rm --env-file docker.conf.env reoyolotest pytest /code/reoyolo/ -sv
+
 ```
 
 ## Run
