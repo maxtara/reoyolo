@@ -31,7 +31,6 @@ conf.YOLO_WEIGHTS = configMap['YOLO_WEIGHTS']
 conf.YOLO_CFG = configMap['YOLO_CFG']
 conf.YOLO_NAMES =  configMap['YOLO_NAMES'] 
 conf.DOMAIN = configMap['DOMAIN']
-conf.SERVICE = configMap['SERVICE']
 conf.TOKEN = configMap['TOKEN']
 
 processor_small = image_processing.SingleThreadedImageProcessor()

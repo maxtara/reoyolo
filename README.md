@@ -33,6 +33,7 @@ Yolo weights and models are copied to the container, but you can specify your ow
   
 ## Build
 ```
+git push
 docker build -t reoyolo .
 docker tag reoyolo maxtara/reoyolo:latest
 docker push maxtara/reoyolo

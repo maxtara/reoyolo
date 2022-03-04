@@ -106,6 +106,7 @@ RUN wget https://raw.githubusercontent.com/AlexeyAB/darknet/master/cfg/coco.name
 
 
 # Code last, change this the most
+ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
 RUN python3 -m pip install https://github.com/maxtara/reoyolo/archive/master.zip
 
 # webserver port
