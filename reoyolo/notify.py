@@ -29,7 +29,7 @@ class Throttler:
 HASSIO_THROTTLER = Throttler()
 
 OBJECT_BLACKLIST = [
-    "bird", "book", "bottle", "pottedplant", "elephant", "laptop", "mouse", "surfboard"
+    "bird", "book", "bottle", "pottedplant", "elephant", "laptop", "mouse", "surfboard", "sheep"
 ]
 
 def notify_img(path, object_type, objects):
