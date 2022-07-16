@@ -9,3 +9,5 @@ RUN mkdir /code/reolink_orig/
 RUN mkdir /code/reolink_cuts/
 
 COPY test_data/* /code/test_data/
+
+COPY reoyolo /usr/local/lib/python3.6/dist-packages/reoyolo/

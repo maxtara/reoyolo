@@ -34,6 +34,10 @@ def url_to_img(url, verify=False):
     img = np.asarray(bytearray(resp.read()), dtype="uint8")
     return cv2.imdecode(img, cv2.IMREAD_COLOR)
 
+def raw_url(url, verify=False):
+    return requests.get(url, stream=True, verify=verify).raw
+
+
 class SingleThreadedImageProcessor():
     """
     Proxy class for ImageProcessor, which locks (only one image processed at a time)

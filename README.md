@@ -45,7 +45,11 @@ mkdir test_data/
 # Put test files in there
 docker build -t reoyolotest -f DockerfileTest .
 docker run -it --rm --env-file docker.conf.env reoyolotest pytest /code/reoyolo/ -sv
+docker run -it --rm --env-file docker.conf.env reoyolotest python3 -m reoyolo
 
+# Test server
+docker run -p 2224:2224 -it --rm --env-file docker.conf.env reoyolotest python3 -m reoyolo
+# (might need to change port to 2224, or swap it around)
 ```
 
 ## Run

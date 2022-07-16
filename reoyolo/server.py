@@ -61,5 +61,10 @@ def latest():
     time.sleep(1)
     return send_file(image_processing.decode_image(img_io), mimetype='image/jpeg')
 
+@app.route("/raw")
+def raw():
+    resp = image_processing.raw_url(conf.IMAGE_URL)
+    return send_file(resp, mimetype='image/jpeg')
+
 def run_server():
     app.run(port=2223, host="0.0.0.0")
