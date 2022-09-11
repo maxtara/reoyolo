@@ -1,7 +1,6 @@
 from requests import post
-import os
 import time
-from reoyolo import conf
+from reoyolo import conf, plate
 
 def now():
     return int(time.time())
@@ -32,7 +31,7 @@ OBJECT_BLACKLIST = [
     "bird", "book", "bottle", "pottedplant", "elephant", "laptop", "mouse", "surfboard", "sheep"
 ]
 
-def notify_img(path, object_type, objects):
+def notify_img(path, object_type, objects, img):
     only_blacklist = True
     for o in objects:
         if o not in OBJECT_BLACKLIST:
@@ -44,11 +43,17 @@ def notify_img(path, object_type, objects):
     else:
          print(str(objects) + " - All good, notifying")
 
+    found_car = 'car' in objects
+    if found_car:
+        object_type = plate.process(img)
+        msg = f"A wild Car appeared - {object_type}"
+    else:
+        msg = f"A wild {object_type} appeared"
 
-    if not HASSIO_THROTTLER.is_allowed():
+    if not HASSIO_THROTTLER.is_allowed() and not found_car:
         return
     data = {
-        "message": "A wild %s appeared" % object_type,
+        "message": msg,
         "data": {
             "image": conf.DOMAIN + '/local/' + path
         }

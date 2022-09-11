@@ -46,13 +46,13 @@ def store_files_and_cuts(img, cuts, original_img, original_filename):
         p = 'notify/' + cuts_file_prefix + str(i) + str(uuid.uuid1()).replace("-","") + ".jpg"
         f = conf.NOTIFY_DIR + p
         image_processing.save_image(cut, f)
-        notify.notify_img(p, label, all_labels)
+        notify.notify_img(p, label, all_labels, original_filename)
     elif len(list(enumerate(cuts))) > 1:
         print("More than one cut, send me the whole photo instead")
         p = 'notify/' + str(uuid.uuid1()).replace("-", "") + ".jpg"
         f = conf.NOTIFY_DIR + p
         image_processing.save_image(img, f)
-        notify.notify_img(p, "multiple", all_labels)
+        notify.notify_img(p, "multiple", all_labels, original_filename)
 
     # Delete files older than 1 day from NOTIFY
     for root, _, files in os.walk(conf.NOTIFY_DIR + "notify/"):

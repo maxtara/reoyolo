@@ -4,7 +4,7 @@ import urllib3
 import pyinotify
 from flask import Flask
 import reoyolo
-from reoyolo import image_processing, dirwatch, server, notify, conf
+from reoyolo import image_processing, dirwatch, server, notify, conf, plate
 import reoyolo
 import uuid
 import requests
@@ -22,13 +22,19 @@ except AttributeError:
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 TEST_IMG = os.environ.get('TEST_IMG', '/tmp/testimgs/img001.jpg')
+TEST_CAR_IMAGE = os.environ.get('TEST_CAR_IMAGE', '/tmp/testimgs/img001.jpg')
 TEST_FOLDER =  os.environ.get('TEST_FOLDER', '/tmp/testimgs/')
 
-# Make a copy the test_img, as we'll delete it
+# Make a copy the TEST_IMG, as we'll delete it
 temp_dir = tempfile.gettempdir()
 temp_path = os.path.join(temp_dir, 'tmgimg.jpg')
 shutil.copy2(TEST_IMG, temp_path)
 TEST_IMG = temp_path
+# Make a copy the TEST_CAR_IMAGE, as we'll delete it
+temp_dir2 = tempfile.gettempdir()
+temp_path2 = os.path.join(temp_dir2, 'tmgimg2.jpg')
+shutil.copy2(TEST_CAR_IMAGE, temp_path2)
+TEST_CAR_IMAGE = temp_path2
 
 
 p_small = None
@@ -115,8 +121,8 @@ class TestSuite():
     def test_notify(self):
         notify.notify("Test", "Test")
         # Static image wont be viewable from phone, as its in a private test location. Unless you mount that somewhere viewable. Probably not worth the effort though
-        notify.notify_img(TEST_IMG, "bird", ["bird"])
-        notify.notify_img(TEST_IMG, "person", ["person"])
+        notify.notify_img(TEST_IMG, "bird", ["bird"], None)
+        notify.notify_img(TEST_IMG, "person", ["person"], None)
 
     def test_server(self):
         # Clear stats
@@ -139,3 +145,11 @@ class TestSuite():
         assert response.status_code == 200
         assert response.json['count'] == 1
         assert response.json['timespent'] > 0
+
+    def test_plates(self):
+        print(f"Testing plates {TEST_CAR_IMAGE}")
+        t = time.time()
+        original_img, img, labels, confidences, cuts = p_small.file_process(TEST_CAR_IMAGE, confidence_level=0.5, return_cuts=True)
+        print(f"####### Done. Displaying img, took {time.time() - t} seconds. Found {labels}. {confidences}" )
+        dirwatch.store_files_and_cuts(img, cuts, original_img, TEST_CAR_IMAGE)
+
