@@ -105,7 +105,7 @@ class ImageProcessor():
         with open(names, 'r') as f:
             self.classes = [line.strip() for line in f.readlines()]
         layer_names = self.net.getLayerNames()
-        self.outputlayers = [layer_names[i[0] - 1] for i in self.net.getUnconnectedOutLayers()]
+        self.outputlayers = [layer_names[i - 1] for i in self.net.getUnconnectedOutLayers()]
 
     def _run_YOLO(self, img, mask_neighbor):
         # 1/255
