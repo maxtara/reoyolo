@@ -10,6 +10,12 @@ from reoyolo import conf
 import collections
 import traceback
 from reoyolo import notify
+requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS += ':HIGH:!DH:!aNULL'
+try:
+    requests.packages.urllib3.contrib.pyopenssl.util.ssl_.DEFAULT_CIPHERS += ':HIGH:!DH:!aNULL'
+except AttributeError:
+    # no pyopenssl support used / needed / available
+    pass
 
 def decode_image(img):
     # Turn image into a in-memory .jpeg - suitable for sending over HTTP

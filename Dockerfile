@@ -36,6 +36,7 @@ RUN wget https://raw.githubusercontent.com/AlexeyAB/darknet/master/cfg/coco.name
 ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
 RUN python3 -m pip install https://github.com/maxtara/reoyolo/archive/master.zip
 
+RUN sed -i "s/\(CipherString *= *\).*/\1DEFAULT@SECLEVEL=1 /" "/etc/ssl/openssl.cnf"
 
 # webserver port
 EXPOSE 2223

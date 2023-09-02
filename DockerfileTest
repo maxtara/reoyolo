@@ -1,4 +1,4 @@
-FROM reoyolo:latest
+FROM maxtara/reoyolo:latest
 
 COPY reoyolo /code/reoyolo/
 
